@@ -5,7 +5,11 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.icdominguez.icdominguez.master_meme.domain.model.MemeEntity
 
-@Database(entities = [MemeEntity::class], version = 1)
+@Database(
+    entities = [MemeEntity::class],
+    version = 1,
+    exportSchema = false,
+)
 @TypeConverters(Converters::class)
 abstract class MemeDatabase: RoomDatabase() {
     abstract fun memeDao(): MemeDao

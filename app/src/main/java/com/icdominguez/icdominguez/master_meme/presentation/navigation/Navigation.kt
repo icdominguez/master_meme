@@ -1,7 +1,7 @@
 package com.icdominguez.icdominguez.master_meme.presentation.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -20,11 +20,11 @@ fun Navigation() {
         startDestination = NavItem.YourMemes.route
     ) {
         composable(route = NavItem.YourMemes.route) { backStackEntry ->
-            val viewModel = hiltViewModel<YourMemesViewModel>(backStackEntry)
+            val yourMemesViewModel: YourMemesViewModel = hiltViewModel(backStackEntry)
 
             YourMemeScreen(
-                state = viewModel.state.collectAsStateWithLifecycle().value,
-                uiEvent = viewModel::uiEvent,
+                state = yourMemesViewModel.state.collectAsStateWithLifecycle().value,
+                uiEvent = yourMemesViewModel::uiEvent,
                 onClick = { memeTemplate ->
                     navController.navigate(NavItem.NewMeme.createNavRoute(memeTemplate))
                 },
@@ -34,13 +34,13 @@ fun Navigation() {
             route = NavItem.NewMeme.route,
             arguments = NavItem.NewMeme.args
         ) { backStackEntry ->
-            val viewmodel = hiltViewModel<NewMemeViewModel>(backStackEntry)
+            val newMemeViewModel: NewMemeViewModel = hiltViewModel(backStackEntry)
             val memeTemplate = backStackEntry.arguments?.getString(NavArg.MemeTemplate.key)
             requireNotNull(memeTemplate) { "Can't be null, new meme requires a template" }
 
             NewMemeScreen(
-                state = viewmodel.state.collectAsStateWithLifecycle().value,
-                uiEvent = viewmodel::uiEvent,
+                state = newMemeViewModel.state.collectAsStateWithLifecycle().value,
+                uiEvent = newMemeViewModel::uiEvent,
                 navController = navController,
                 memeTemplate = memeTemplate
             )

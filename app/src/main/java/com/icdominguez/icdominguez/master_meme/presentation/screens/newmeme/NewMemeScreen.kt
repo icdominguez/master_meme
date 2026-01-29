@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.displayCutout
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBars
@@ -187,7 +186,6 @@ fun NewMemeScreen(
             onDismissRequest = {
                 showSaveMemeBottomSheetDialog = false
             },
-            windowInsets = WindowInsets.displayCutout
         ) {
             Column(
                 Modifier.padding(bottom = bottomPadding.dp)

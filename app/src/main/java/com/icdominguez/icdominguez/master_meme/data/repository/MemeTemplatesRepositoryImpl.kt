@@ -9,7 +9,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class MemeTemplatesRepositoryImpl @Inject constructor(
-    @ApplicationContext private val context: Context
+    @param:ApplicationContext private val context: Context
 ): MemeTemplatesRepository {
 
     private companion object val MEME_TEMPLATES_FOLDER = "meme_templates"

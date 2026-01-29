@@ -21,7 +21,7 @@ import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 class FileManagerRepositoryImpl @Inject constructor(
-    @ApplicationContext private val context: Context,
+    @param:ApplicationContext private val context: Context,
 ): FileManagerRepository {
 
     private companion object {
@@ -82,7 +82,7 @@ class FileManagerRepositoryImpl @Inject constructor(
             options.inPreferredConfig = Bitmap.Config.ARGB_8888
             imageBitmap = BitmapFactory.decodeStream(FileInputStream(file) , null, options)?.asImageBitmap()
         } catch (e: Exception) {
-            Log.e("icd", "Error while converting file to image bitmap")
+            Log.e("icd", "Error while converting file to image bitmap. Exception ${e.message}")
         }
         return imageBitmap
     }

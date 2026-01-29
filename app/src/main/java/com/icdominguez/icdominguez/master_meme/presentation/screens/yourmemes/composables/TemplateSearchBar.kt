@@ -2,7 +2,6 @@ package com.icdominguez.icdominguez.master_meme.presentation.screens.yourmemes.c
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -49,77 +48,86 @@ fun TemplateSearchBar(
     var searchListState by remember { mutableStateOf(searchList) }
 
     SearchBar(
-        query = searchQuery,
-        onQueryChange = { newQuery ->
-            searchQuery = newQuery
-            searchListState = searchList.filter { it.split("/").last().contains(searchQuery.lowercase()) }
-        },
         modifier = Modifier
             .focusRequester(focusRequester = focusRequester)
-            .fillMaxSize()
             .padding(horizontal = 16.dp),
-        onSearch = {
-            active.value = false
-        },
-        active = active.value,
-        onActiveChange = { active.value = it },
-        placeholder = { Text(stringResource(R.string.search_input)) },
-        leadingIcon = {
-            IconButton(
-                onClick = {
+        expanded = active.value,
+        onExpandedChange = { active.value = it },
+        inputField = {
+            SearchBarDefaults.InputField(
+                query = searchQuery,
+                onQueryChange = { newQuery ->
+                    searchQuery = newQuery
+                    searchListState = searchList.filter { it.split("/").last().contains(searchQuery.lowercase()) }
+                },
+                onSearch = {
                     active.value = false
-                }
-            ) {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = null,
-                    tint = SecondaryFixedDim,
-                )
-            }
-        },
-        trailingIcon = {
-            IconButton(onClick = {
-                searchQuery = ""
-                searchListState = searchList
-            }) {
-                Icon(
-                    imageVector = Icons.Default.Close,
-                    contentDescription = null,
-                    tint = SecondaryFixedDim,
-                )
-            }
-        },
-        colors = SearchBarDefaults.colors(
-            containerColor = Color.Transparent
-        ),
-        content = {
-            Box {
-                Text(
-                    modifier = Modifier
-                        .padding(top = 12.dp),
-                    text = if(searchListState.isNotEmpty()) "${searchListState.size} templates" else "No memes found :(",
-                    style = TextStyle(
-                        fontSize = 12.sp,
-                        color = MaterialTheme.colorScheme.outline
-                    )
-                )
-                LazyVerticalGrid(
-                    modifier = Modifier
-                        .padding(top = 40.dp),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp),
-                    columns = GridCells.Fixed(2)
-                ) {
-                    items(searchListState.size) { index ->
-                        TemplateItem(
-                            template = searchListState[index],
-                            sheetState = sheetState,
-                            scope = scope,
-                            onTemplateClicked = { onTemplateClicked(searchListState[index]) }
+                },
+                expanded = active.value,
+                onExpandedChange = { active.value = it },
+                placeholder = { Text(stringResource(R.string.search_input)) },
+                leadingIcon = {
+                    IconButton(
+                        onClick = {
+                            active.value = false
+                        }
+                    ) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = null,
+                            tint = SecondaryFixedDim,
                         )
                     }
+                },
+                trailingIcon = {
+                    IconButton(onClick = {
+                        searchQuery = ""
+                        searchListState = searchList
+                    }) {
+                        Icon(
+                            imageVector = Icons.Default.Close,
+                            contentDescription = null,
+                            tint = SecondaryFixedDim,
+                        )
+                    }
+                },
+                colors = SearchBarDefaults.inputFieldColors(
+                    focusedContainerColor = Color.Transparent,
+                    unfocusedContainerColor = Color.Transparent,
+                    disabledContainerColor = Color.Transparent,
+                )
+            )
+        },
+        colors = SearchBarDefaults.colors(
+            containerColor = Color.Transparent,
+        ),
+    ) {
+        Box {
+            Text(
+                modifier = Modifier
+                    .padding(top = 12.dp),
+                text = if(searchListState.isNotEmpty()) "${searchListState.size} templates" else "No memes found :(",
+                style = TextStyle(
+                    fontSize = 12.sp,
+                    color = MaterialTheme.colorScheme.outline
+                )
+            )
+            LazyVerticalGrid(
+                modifier = Modifier
+                    .padding(top = 40.dp),
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                columns = GridCells.Fixed(2)
+            ) {
+                items(searchListState.size) { index ->
+                    TemplateItem(
+                        template = searchListState[index],
+                        sheetState = sheetState,
+                        scope = scope,
+                        onTemplateClicked = { onTemplateClicked(searchListState[index]) }
+                    )
                 }
             }
         }
-    )
+    }
 }
