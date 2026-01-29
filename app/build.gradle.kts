@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace = "com.icdominguez.icdominguez.master_meme"
+    namespace = "com.icdominguez.master_meme"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.icdominguez.icdominguez.master_meme"
+        applicationId = "com.icdominguez.master_meme"
         minSdk = 30
         targetSdk = 36
         versionCode = 1

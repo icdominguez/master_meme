@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MemeCreator</string>
+    <string name="app_name">MasterMeme</string>
     <string name="no_memes_found">Tap + button to create your first meme</string>
     <string name="choose_template_title">Choose template</string>
     <string name="choose_template_description">Choose template for your next meme masterpiece</string>

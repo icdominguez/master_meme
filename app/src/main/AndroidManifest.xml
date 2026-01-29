@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.App.Starting"
-        android:name=".MasterMemeApp">
+        android:name="com.icdominguez.master_meme.MasterMemeApp">
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -23,7 +23,7 @@
         </provider>
 
         <activity
-            android:name=".presentation.MainActivity"
+            android:name="com.icdominguez.master_meme.presentation.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.App.Starting">
             <intent-filter>
